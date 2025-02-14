@@ -2,7 +2,7 @@ from google import genai
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
 import random
-import asyncio
+from background import keep_alive
 
 # 🔑 API-ключи
 GEMINI_API_KEY = "AIzaSyAaPCjYO4xVOcQx8_PgvH1gX7bSRWPfr3c"
@@ -35,12 +35,8 @@ async def toxic_funny_response(update: Update, context: CallbackContext):
 
     await update.message.reply_text(toxic_reply)
 
-@http
-def telegram_bot(request):
-    return asyncio.run(main(request))
 
-
-def main(request):
+def main():
     """Запуск Telegram-бота"""
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
     app.add_handler(CommandHandler("toxic", toxic_funny_response))
@@ -49,5 +45,6 @@ def main(request):
     app.run_polling()
 
 
+keep_alive()
 if __name__ == "__main__":
     main()
