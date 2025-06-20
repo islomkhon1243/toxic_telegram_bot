@@ -8,8 +8,10 @@ GEMINI_API_KEY = "AIzaSyAaPCjYO4xVOcQx8_PgvH1gX7bSRWPfr3c"
 TELEGRAM_BOT_TOKEN = "7760792899:AAG_KTwM_SXQQO6OINo7nkvv4goriB-RasI"
 
 # ⚙️ Настройка Google Gemini API
-client = genai.Client(api_key=GEMINI_API_KEY)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
 
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 async def toxic_funny_response(update: Update, context: CallbackContext):
     """Обработчик команды /toxic — отвечает токсично на сообщение пользователя."""
@@ -25,8 +27,7 @@ async def toxic_funny_response(update: Update, context: CallbackContext):
     """
 
     try:
-        response = client.models.generate_content(model="gemini-2.0-flash",
-                                                  contents=prompt)
+        response = model.generate_content(prompt)
         toxic_reply = response.text if hasattr(
             response, "text") else "Ошибка генерации. Даже ИИ заскучал."
     except Exception as e:
