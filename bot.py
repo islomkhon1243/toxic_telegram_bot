@@ -2,7 +2,6 @@ import google.generativeai as genai
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
 import random
-from background import keep_alive
 
 # 🔑 API-ключи
 GEMINI_API_KEY = "AIzaSyAaPCjYO4xVOcQx8_PgvH1gX7bSRWPfr3c"
@@ -43,8 +42,3 @@ def main():
 
     print("🤖 Бот запущен... Вводи /toxic!")
     app.run_polling()
-
-
-keep_alive()
-if __name__ == "__main__":
-    main()
