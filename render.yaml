@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: toxic-telegram-bot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        value: "7760792899:AAG_KTwM_SXQQO6OINo7nkvv4goriB-RasI"
+      - key: GEMINI_API_KEY
+        value: "AIzaSyAaPCjYO4xVOcQx8_PgvH1gX7bSRWPfr3c"
